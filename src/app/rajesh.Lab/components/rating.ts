@@ -4,13 +4,12 @@ import {Component, EventEmitter} from '@angular/core';
   selector: 'rating',
   inputs: ['rate'],
   outputs: ['updateRate: rateChange'],
-
-
+  
   template: `
     <span>
     <span tabindex="0">
     <template ngFor let-task [ngForOf]="range" let-i="index">
-        <span style="font-size:50px; cursor:pointer;" (click)="update(i + 1)" [ngClass]="{'greenStar' : i < rate, 'blackStar':i >= rate}">*</span>
+        <span style="font-size:50px; cursor:pointer;" (click)="update(i + 1)" [ngClass]="{'greenStar' : i < rate, 'redStar':i >= rate}">*</span>
     </template>
     </span>
   `,
@@ -18,17 +17,17 @@ import {Component, EventEmitter} from '@angular/core';
   .greenStar {
     color: green;
   }, 
-  .blackStar {
-    color: black;
+  .redStar {
+    color: red;
   }`]
 })
 export class Rating {
    range:Array<number> = [1,2,3,4,5];
    rate:number;
-   updateRate:EventEmitter<string> = new EventEmitter();
-  
-  update(value:string) {
-    //this.rate = value;
+   private updateRate:EventEmitter<number> = new EventEmitter();
+
+   update(value:number) {
+    this.rate = value;
     this.updateRate.next(value);
   }
 }
