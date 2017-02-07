@@ -3,7 +3,7 @@ import { Component, Directive } from '@angular/core';
 
 @Component({
   selector: 'my-app',
-  templateUrl: './app/rajesh.Lab/components/main.html'
+  templateUrl: './app/rajesh.Lab/components/directive-main.html'
 })
 //@Directive({
  // selector: '[Rating]'
