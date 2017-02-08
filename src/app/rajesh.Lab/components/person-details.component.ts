@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Response } from '@angular/http';
 
@@ -9,7 +9,7 @@ import { PeopleService } from '../services/people.service';
   selector: 'person-details',
   templateUrl: './app/rajesh.Lab/components/person-details.component.html'
 })
-export class PersonDetailsComponent implements OnInit, OnDestroy {
+export class PersonDetailsComponent implements OnInit {
     person: Person;
     sub: any;
     professions: string[] = ['jedi', 'bounty hunter', 'princess', 'sith lord'];
@@ -27,22 +27,5 @@ export class PersonDetailsComponent implements OnInit, OnDestroy {
         //     .get(id)
         //     .subscribe(p => this.person = p);
         // });
-    }
-
-    ngOnDestroy(){
-        this.sub.unsubscribe();
-    }
-
-    gotoPeoplesList(){
-        let link = ['/persons'];
-        this.router.navigate(link);
-    }
-
-    savePersonDetails(){
-    //   this.peopleService
-    //       .save(this.person)
-    //       .subscribe(
-    //         (r: Response) => {console.log('success');}
-    //       );
     }
 }

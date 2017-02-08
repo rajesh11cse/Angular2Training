@@ -12,10 +12,11 @@ import { PeopleService } from '../services/people.service';
     </section>
       <ul>
         <li *ngFor="let person of people">
-            <a href="#">
+            <a href="#" [routerLink]="['/developers', person.id]">
           {{person.name}}
           </a>
         </li>
+        <router-outlet></router-outlet>
       </ul>
       <section *ngIf="errorMessage">
         {{errorMessage}}
@@ -25,17 +26,20 @@ import { PeopleService } from '../services/people.service';
 })
 export class PeopleListComponent implements OnInit {
   people: Person[] = [];
+  people2: Person[] = [];
   errorMessage: string = '';
   isLoading: boolean = true;
 
-  constructor(private peopleService: PeopleService) { }
+  constructor(private peopleService : PeopleService){ }
 
-  ngOnInit() {
-    this.peopleService.getAll()
-    //.then(peoples => this.people = peoples);//For Promise return type
-    .subscribe(p => this.people = p)
-    /* happy path */ //p => this.people = p,
-    /* error path */ //e => this.errorMessage = e,
-    /* onComplete */ //() => this.isLoading = false);
+  ngOnInit(){
+    this.peopleService
+      .getAll()
+      .subscribe(
+         heroes => this.people2 = heroes,
+            error =>  this.errorMessage = <any>error);
+
+         console.log(this.people2);
+         console.log(this.errorMessage);
   }
 }
