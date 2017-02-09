@@ -1,6 +1,6 @@
 
 import { Component, OnInit } from '@angular/core';
-import { Person } from '../models/person';
+import { Developer } from '../models/developer';
 import { PeopleService } from '../services/people.service';
 
 @Component({
@@ -11,9 +11,9 @@ import { PeopleService } from '../services/people.service';
     Loading our developers..
     </section>
       <ul>
-        <li *ngFor="let person of people">
-            <a href="#" [routerLink]="['/developers', person.id]">
-          {{person.name}}
+        <li *ngFor="let developer of people">
+            <a href="#" [routerLink]="['/developers', developer.id]">
+          {{developer.name}}
           </a>
         </li>
         <router-outlet></router-outlet>
@@ -25,21 +25,18 @@ import { PeopleService } from '../services/people.service';
   `
 })
 export class PeopleListComponent implements OnInit {
-  people: Person[] = [];
-  people2: Person[] = [];
+  people: Developer[] = [];
   errorMessage: string = '';
   isLoading: boolean = true;
 
-  constructor(private peopleService : PeopleService){ }
+  constructor(private peopleService: PeopleService) { }
 
-  ngOnInit(){
+  ngOnInit() {
     this.peopleService
       .getAll()
       .subscribe(
-         heroes => this.people2 = heroes,
-            error =>  this.errorMessage = <any>error);
-
-         console.log(this.people2);
-         console.log(this.errorMessage);
+         /* happy path */ p => this.people = p,
+         /* error path */ e => this.errorMessage = e,
+         /* onComplete */ () => this.isLoading = false);
   }
 }
