@@ -11,6 +11,7 @@ import { PeopleService } from '../services/people.service';
 })
 export class PersonDetailsComponent implements OnInit {
     developer: Developer;
+    professions: string[] = ['SSD Engineer', 'Software Engineer', 'Trainer'];
     constructor(private peopleService: PeopleService,
         private route: ActivatedRoute,
         private router: Router,

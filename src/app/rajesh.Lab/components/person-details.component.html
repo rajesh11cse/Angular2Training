@@ -4,10 +4,55 @@
     <h2>You selected: {{developer.name}}</h2>
     <h3>Description</h3>
     <p>
-      Name : {{developer.name}} 
-      Age : {{developer.age}}
-      Profssion :{{developer.profession}}
+      Name : {{developer.name}} Age : {{developer.age}} Profssion :{{developer.profession}}
     </p>
   </section>
+  <form (ngSubmit)="saveDeveloperDetails()" #developerForm="ngForm">
+    <div>
+      <label for="name">Name: </label>
+      <input type="text" name="name" required [(ngModel)]="developer.name" #name="ngModel">
+      <div [hidden]="name.valid || name.pristine" class="error" style="color: red">
+        Name is required!
+      </div>
+    </div>
+    <div>
+      <label for="age">Age: </label>
+      <input type="number" name="age2" [(ngModel)]="developer.age" #age="ngModel" required>
+      <div [hidden]="age.valid || age.pristine" class="error" style="color: red">
+        Age is required!
+      </div>
+    </div>
+    <div>
+      <label for="profession">Profession:</label>
+      <select name="profession" [(ngModel)]="developer.profession">
+          <option *ngFor="let profession of professions" [value]="profession">{{profession}}</option>
+        </select>
+    </div>
+    <button type="submit" [disabled]="!developerForm.form.valid">Save</button>
+  </form>
   <button (click)="goBack();">Back to peoples list</button>
 <div>
+
+  <!--<form (ngSubmit)="saveDeveloperDetails()" #developerForm="ngForm">
+    <div>
+      <label for="name">Name: </label>
+      <input type="text" name="name" required [(ngModel)]="developer.name" #name="ngModel">
+      <div [hidden]="name.valid || name.pristine" style="color: red" class="error">
+        Name is required.
+      </div>
+    </div>
+    <div>
+      <label for="weight">Age: </label>
+      <input type="number" #age="ngModel" [(ngModel)]="developer.age">
+      <div [hidden]="age.valid || age.pristine" style="color: red" class="error">
+        Age is required.
+      </div>
+    </div>
+    <div>
+      <label for="profession">Profession:</label>
+      <select name="profession" [(ngModel)]="developer.profession">
+          <option *ngFor="let profession of professions" [value]="profession">{{profession}}</option>
+        </select>
+    </div>
+    <button type="submit" [disabled]="!developerForm.form.valid">Save</button>
+  </form>-->
